@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Page</title>
+</head>
+<body>
+<h3>{{note}}</h3>
+
+    <br>
+
+    <form action="http://localhost:8000/user/persist/" method="post">
+        {% csrf_token %}
+        User ID :     <input type="text" name="id" value="{{user_nm.id}}"> <br><br>
+        User Name :     <input type="text" name="name" value="{{user_nm.name}}"> <br><br>
+        <input type="submit">
+    </form>
+
+    <br>
+
+    <table>
+            <thead>
+                <th>User ID</th>
+                <th>User Name</th>
+                <th>Action </th>
+            </thead>
+    {% for user in users %}
+            <tbody>
+                <td>{{user.id}}</td>
+                <td>{{user.name}}</td>
+            <td>
+               <a href="http://localhost:8000/user/edit/{{user.id}}">EDIT</a>
+                    &nbsp;&nbsp;
+               <a href="http://localhost:8000/user/delete/{{user.id}}">DELETE</a>
+
+                </td>
+
+
+            </tbody>
+        {% endfor %}
+
+    </table>
+</body>
+</html>

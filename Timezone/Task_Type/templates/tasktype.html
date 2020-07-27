@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Type Page</title>
+</head>
+<body>
+<h3>{{note}}</h3>
+
+    <br>
+
+    <form action="http://localhost:8000/task_type/persist/" method="post">
+        {% csrf_token %}
+        Task Type ID :     <input type="text" name="id" value="{{task.id}}"> <br><br>
+        Task Type :     <input type="text" name="type" value="{{task.type}}"> <br><br>
+        <input type="submit">
+    </form>
+
+    <br>
+
+    <table>
+            <thead>
+                <th>Task Type ID</th>
+                <th>Task Type</th>
+                <th>Action </th>
+            </thead>
+    {% for task in tasktypes %}
+            <tbody>
+                <td>{{task.id}}</td>
+                <td>{{task.type}}</td>
+            <td>
+               <a href="http://localhost:8000/task_type/edit/{{task.id}}">EDIT</a>
+                    &nbsp;&nbsp;
+               <a href="http://localhost:8000/task_type/delete/{{task.id}}">DELETE</a>
+
+                </td>
+
+
+            </tbody>
+        {% endfor %}
+
+    </table>
+</body>
+</html>

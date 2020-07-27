@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>timezone Output</title>
+</head>
+<body>
+<h3>{{note}}</h3>
+
+    <br>
+
+    <form action="http://localhost:8000/timezone_output/persist/" method="post">
+        {% csrf_token %}
+
+        Task Type :  <select name="task">
+                <option value="0">--Select--</option>
+            {% for task in tasktypes %}
+                    <option value="{{task.id}}">{{task.type}} - {{task.id}}</option>
+            {% endfor %}
+        </select><br><br>
+        User :  <select name="user">
+                <option value="0">--Select--</option>
+            {% for user in users %}
+                    <option value="{{user.id}}">{{user.name}} - {{user.id}}</option>
+            {% endfor %}
+        </select><br><br>
+        Country :  <select name="country">
+                <option value="0">--Select--</option>
+            {% for con in countries %}
+                    <option value="{{con.id}}">{{con.country_name}} - {{con.id}}</option>
+            {% endfor %}
+        </select><br><br>
+        <h5>{{disp}}</h5>
+        <input type="submit">
+    </form>
+
+    <br>
+
+    </body>
+</html>

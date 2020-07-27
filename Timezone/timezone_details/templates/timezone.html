@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>timezone Details</title>
+</head>
+<body>
+<h3>{{note}}</h3>
+
+    <br>
+
+    <form action="http://localhost:8000/timezone_detail/persist/" method="post">
+        {% csrf_token %}
+        Timezone ID :     <input type="text" name="id" value="{{time.id}}"> <br><br>
+        Task Type :  <select name="task">
+                <option value="0">--Select--</option>
+            {% for task in tasktypes %}
+                    <option value="{{task.id}}">{{task.type}} - {{task.id}}</option>
+            {% endfor %}
+        </select><br><br>
+        User :  <select name="user">
+                <option value="0">--Select--</option>
+            {% for user in users %}
+                    <option value="{{user.id}}">{{user.name}} - {{user.id}}</option>
+            {% endfor %}
+        </select><br><br>
+        Country :  <select name="country">
+                <option value="0">--Select--</option>
+            {% for con in countries %}
+                    <option value="{{con.id}}">{{con.country_name}} - {{con.id}}</option>
+            {% endfor %}
+        </select><br><br>
+        Start time :     <input type="text" name="starttime" value="{{time.starttime}}"> <br><br>
+        End time :     <input type="text" name="endtime" value="{{time.endtime}}"> <br><br>
+
+        <input type="submit">
+    </form>
+
+    <br>
+
+    <table>
+            <thead>
+                <th>Time ID</th>
+                <th>Task Type</th>
+                <th>User Name</th>
+                <th>Country</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Action </th>
+            </thead>
+    {% for time in timezones %}
+            <tbody>
+                <td>{{time.id}}</td>
+                <td>{{time.tasktype.type}}</td>
+                <td>{{time.user.name}}</td>
+                <td>{{time.country.country_name}}</td>
+                <td>{{time.starttime}}</td>
+                <td>{{time.endtime}}</td>
+            <td>
+               <a href="http://localhost:8000/timezone_detail/edit/{{time.id}}">EDIT</a>
+                    &nbsp;&nbsp;
+               <a href="http://localhost:8000/timezone_detail/delete/{{time.id}}">DELETE</a>
+
+                </td>
+
+
+            </tbody>
+        {% endfor %}
+
+    </table>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Country Page</title>
+</head>
+<body>
+<h3>{{note}}</h3>
+
+    <br>
+
+    <form action="http://localhost:8000/country/persist/" method="post">
+        {% csrf_token %}
+        Country ID :     <input type="text" name="id" value="{{country.id}}"> <br><br>
+        Country Name :     <input type="text" name="country_name" value="{{country.country_name}}"> <br><br>
+        <input type="submit">
+    </form>
+
+    <br>
+
+    <table>
+            <thead>
+                <th>Country ID</th>
+                <th>Country Name</th>
+                <th>Action </th>
+            </thead>
+    {% for con in countries %}
+            <tbody>
+                <td>{{con.id}}</td>
+                <td>{{con.country_name}}</td>
+            <td>
+               <a href="http://localhost:8000/country/edit/{{con.id}}">EDIT</a>
+                    &nbsp;&nbsp;
+               <a href="http://localhost:8000/country/delete/{{con.id}}">DELETE</a>
+
+                </td>
+
+
+            </tbody>
+        {% endfor %}
+
+    </table>
+</body>
+</html>
